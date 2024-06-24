@@ -6,8 +6,9 @@ namespace main_menu.extensions
 		{
 			app.UseHttpsRedirection();
 			app.MapControllers();
-
 			app.MapGet("/", () => "Server is Living!");
+			app.UseAuthentication();
+			app.UseAuthorization();
 		}
 	}
 }

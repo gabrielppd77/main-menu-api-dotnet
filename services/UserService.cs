@@ -2,6 +2,7 @@ using main_menu.dtos;
 using main_menu.models;
 using main_menu.repositories;
 using main_menu.utils;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace main_menu.services
 {
@@ -45,13 +46,17 @@ namespace main_menu.services
 
 			if (userFinded == null)
 			{
-				return UnauthorizedAccessException("Invalid credentials 1");
+				var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Oops!!!" };
+				throw new HttpResponseException(msg);
+				throw new UnauthorizedHttpResult("Não foi possível prosseguir, credenciais incorretas");
 			}
 
 			if (PasswordHasher.VerifyPassword(request.Password, userFinded.Password))
 			{
-				return Unauthorized("Invalid credentials 2");
+				throw new UnauthorizedHttpResult("Não foi possível prosseguir, credenciais incorretas");
 			}
+
+			return userFinded;
 		}
 	}
 }
