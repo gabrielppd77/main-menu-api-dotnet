@@ -1,3 +1,4 @@
+using System.Net;
 using main_menu.dtos;
 using main_menu.models;
 using main_menu.repositories;
@@ -40,15 +41,32 @@ namespace main_menu.services
 			return user;
 		}
 
+
+		public class NotFoundWithMessageResult : IHttpActionResult
+		{
+			private string message;
+
+			public NotFoundWithMessageResult(string message)
+			{
+				this.message = message;
+			}
+
+			public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+			{
+				var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+				response.Content = new StringContent(message);
+				return Task.FromResult(response);
+			}
+		}
+
 		public async Task<User> AuthUser(LoginRequest request)
 		{
 			var userFinded = await _userRepository.FindByEmail(request.Email);
 
 			if (userFinded == null)
 			{
-				var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Oops!!!" };
+				var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "Não foi possível prosseguir, credenciais incorretas" };
 				throw new HttpResponseException(msg);
-				throw new UnauthorizedHttpResult("Não foi possível prosseguir, credenciais incorretas");
 			}
 
 			if (PasswordHasher.VerifyPassword(request.Password, userFinded.Password))
