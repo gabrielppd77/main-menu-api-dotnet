@@ -25,7 +25,6 @@ namespace main_menu.controllers
 			var token = _tokenService.CreateToken(user.Id);
 			return new AuthResponse()
 			{
-				UserId = user.Id,
 				Token = token
 			};
 		}
@@ -37,7 +36,6 @@ namespace main_menu.controllers
 			var token = _tokenService.CreateToken(user.Id);
 			return new AuthResponse()
 			{
-				UserId = user.Id,
 				Token = token
 			};
 		}

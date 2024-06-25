@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 
-using main_menu.configurations;
 using main_menu.models;
+using main_menu.database.context;
 
-namespace main_menu.repositories
+namespace main_menu.database.repositories
 {
 	public class UserRepository
 	{

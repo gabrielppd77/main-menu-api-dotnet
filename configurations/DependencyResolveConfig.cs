@@ -1,22 +1,27 @@
+using main_menu.database.context;
 using main_menu.services;
-using main_menu.repositories;
+using main_menu.database.repositories;
 
 namespace main_menu.configurations
 {
 	public static class DependencyResolveConfig
 	{
-		public static IServiceCollection ResolveServiceDependecy(this IServiceCollection services)
+		public static IServiceCollection AddContexts(this IServiceCollection services)
 		{
-			services.AddScoped<UserService>();
-			services.AddScoped<TokenService>();
-
+			services.AddScoped<PgContext>();
 			return services;
 		}
 
-		public static IServiceCollection ResolveRepositoryDependecy(this IServiceCollection services)
+		public static IServiceCollection AddServices(this IServiceCollection services)
+		{
+			services.AddScoped<UserService>();
+			services.AddScoped<TokenService>();
+			return services;
+		}
+
+		public static IServiceCollection AddRepositories(this IServiceCollection services)
 		{
 			services.AddScoped<UserRepository>();
-
 			return services;
 		}
 	}

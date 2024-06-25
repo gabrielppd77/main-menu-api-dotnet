@@ -1,11 +1,11 @@
-using main_menu.extensions;
+using main_menu.configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Config();
+builder.ConfigBuild();
 
 var app = builder.Build();
 
-app.Config();
+app.ConfigApp();
 
 app.Run();

@@ -398,7 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Docker
-/data
+/volumes
 
 #Env
 appsettings.json

@@ -1,8 +1,8 @@
-namespace main_menu.extensions
+namespace main_menu.configurations
 {
-	public static class AppExtensions
+	public static class AppConfig
 	{
-		public static void Config(this WebApplication app)
+		public static void ConfigApp(this WebApplication app)
 		{
 			app.UseHttpsRedirection();
 			app.MapControllers();

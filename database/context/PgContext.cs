@@ -1,7 +1,7 @@
 using main_menu.models;
 using Microsoft.EntityFrameworkCore;
 
-namespace main_menu.configurations
+namespace main_menu.database.context
 {
 	public class PgContext : DbContext
 	{
