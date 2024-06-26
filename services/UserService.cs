@@ -20,7 +20,7 @@ namespace main_menu.services
 
 			if (userFinded != null)
 			{
-				throw new BadHttpRequestException("Não foi possível prosseguir, encontramos um usuário já cadastrado com o email informado");
+				throw new BadHttpRequestException("Não foi possível prosseguir, encontramos um usuário já cadastrado com o email informado.");
 			}
 
 			var hashedPassword = PasswordHasher.HashPassword(request.Password);
@@ -46,12 +46,12 @@ namespace main_menu.services
 
 			if (userFinded == null)
 			{
-				throw new BadHttpRequestException("Não foi possível prosseguir, credenciais incorretas");
+				throw new BadHttpRequestException("Não foi possível prosseguir, credenciais incorretas.");
 			}
 
 			if (!PasswordHasher.VerifyPassword(request.Password, userFinded.Password))
 			{
-				throw new BadHttpRequestException("Não foi possível prosseguir, credenciais incorretas");
+				throw new BadHttpRequestException("Não foi possível prosseguir, credenciais incorretas.");
 			}
 
 			return userFinded;

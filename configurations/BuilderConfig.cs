@@ -17,6 +17,8 @@ namespace main_menu.configurations
 		public static void AddServices(this WebApplicationBuilder builder)
 		{
 			builder.Services.AddControllers();
+			builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+			builder.Services.AddProblemDetails();
 			builder.Services.AddContexts();
 			builder.Services.AddServices();
 			builder.Services.AddRepositories();

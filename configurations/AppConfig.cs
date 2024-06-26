@@ -9,6 +9,7 @@ namespace main_menu.configurations
 			app.MapGet("/", () => "Server is Living!");
 			app.UseAuthentication();
 			app.UseAuthorization();
+			app.UseExceptionHandler();
 		}
 	}
 }
