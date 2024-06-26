@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using main_menu.dtos;
 using main_menu.services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace main_menu.controllers
 {
@@ -18,6 +19,7 @@ namespace main_menu.controllers
 			_tokenService = tokenService;
 		}
 
+		[AllowAnonymous]
 		[HttpPost("register")]
 		public async Task<AuthResponse> Register(RegistrationRequest request)
 		{
@@ -29,6 +31,7 @@ namespace main_menu.controllers
 			};
 		}
 
+		[AllowAnonymous]
 		[HttpPost("login")]
 		public async Task<AuthResponse> Login(LoginRequest request)
 		{
