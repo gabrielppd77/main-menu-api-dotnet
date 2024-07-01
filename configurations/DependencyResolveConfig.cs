@@ -16,12 +16,14 @@ namespace main_menu.configurations
 		{
 			services.AddScoped<UserService>();
 			services.AddScoped<TokenService>();
+			services.AddScoped<CategoryService>();
 			return services;
 		}
 
 		public static IServiceCollection AddRepositories(this IServiceCollection services)
 		{
 			services.AddScoped<UserRepository>();
+			services.AddScoped<CategoryRepository>();
 			return services;
 		}
 	}
