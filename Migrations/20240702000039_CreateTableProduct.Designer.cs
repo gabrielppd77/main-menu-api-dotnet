@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using main_menu.database.context;
@@ -11,9 +12,11 @@ using main_menu.database.context;
 namespace main_menu.Migrations
 {
     [DbContext(typeof(PgContext))]
-    partial class PgContextModelSnapshot : ModelSnapshot
+    [Migration("20240702000039_CreateTableProduct")]
+    partial class CreateTableProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,9 +63,6 @@ namespace main_menu.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");

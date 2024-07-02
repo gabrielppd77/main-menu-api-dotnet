@@ -31,7 +31,7 @@ namespace main_menu.services
 
 			if (category == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a categoria");
+				throw new BadHttpRequestException("Não foi possível encontrar a categoria.");
 			}
 
 			_repository.RemoveCategory(category);
@@ -45,7 +45,7 @@ namespace main_menu.services
 
 			if (category == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a categoria");
+				throw new BadHttpRequestException("Não foi possível encontrar a categoria.");
 			}
 
 			category.Name = request.Name;

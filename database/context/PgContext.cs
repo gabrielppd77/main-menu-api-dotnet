@@ -14,6 +14,7 @@ namespace main_menu.database.context
 
 		public DbSet<User> User { get; set; }
 		public DbSet<Category> Category { get; set; }
+		public DbSet<Product> Product { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
