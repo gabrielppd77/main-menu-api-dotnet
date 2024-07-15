@@ -1,5 +1,6 @@
 using System.Text;
 using main_menu.settings;
+using main_menu.utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -9,12 +10,13 @@ namespace main_menu.configurations
 	{
 		public static void ConfigBuild(this WebApplicationBuilder builder)
 		{
-			builder.AddServices();
+			builder.AddConfigServices();
 			builder.AddConfigs();
 			builder.AddJWT();
+			builder.AddCorsPolicy();
 		}
 
-		public static void AddServices(this WebApplicationBuilder builder)
+		public static void AddConfigServices(this WebApplicationBuilder builder)
 		{
 			builder.Services.AddControllers();
 			builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -53,6 +55,19 @@ namespace main_menu.configurations
 					ValidateAudience = false,
 					ValidateLifetime = true
 				};
+			});
+		}
+
+		public static void AddCorsPolicy(this WebApplicationBuilder builder)
+		{
+			var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy(Constants.CorsPolicy,
+					builder => builder.WithOrigins(allowedOrigins ?? [])
+										.AllowAnyMethod()
+										.AllowAnyHeader()
+										.AllowCredentials());
 			});
 		}
 	}

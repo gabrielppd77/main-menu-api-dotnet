@@ -13,4 +13,3 @@ services:
       PGDATA: /docker/pg
     volumes:
       - ./volumes/pg:/docker/pg
-    restart: always
