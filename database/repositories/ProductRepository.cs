@@ -1,8 +1,8 @@
-using main_menu.database.context;
-using main_menu.models;
+using main_menu.Contexts;
+using main_menu.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace main_menu.database.repositories
+namespace main_menu.Database.repositories
 {
 	public class ProductRepository
 	{

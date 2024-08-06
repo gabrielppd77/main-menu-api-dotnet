@@ -1,8 +1,8 @@
-using main_menu.dtos;
-using main_menu.services;
+using main_menu.DTOS;
+using main_menu.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace main_menu.controllers
+namespace main_menu.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
@@ -15,22 +15,28 @@ namespace main_menu.controllers
 			_service = service;
 		}
 
+		[HttpGet]
+		public async Task<List<CategoryResponseDTO>> GetAll()
+		{
+			return await _service.GetAll();
+		}
+
 		[HttpPost]
-		public async Task Create(CategoryCreate request)
+		public async Task Create(CategoryCreateDTO request)
 		{
 			await _service.Create(request);
+		}
+
+		[HttpPut("{id}")]
+		public async Task Update(Guid id, CategoryUpdateDTO request)
+		{
+			await _service.Update(id, request);
 		}
 
 		[HttpDelete("{id}")]
 		public async Task Remove(Guid id)
 		{
 			await _service.Remove(id);
-		}
-
-		[HttpPut("{id}")]
-		public async Task Update(Guid id, CategoryUpdate request)
-		{
-			await _service.Update(id, request);
 		}
 	}
 }

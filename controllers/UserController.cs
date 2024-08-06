@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-using main_menu.dtos;
-using main_menu.services;
+using main_menu.DTOS;
+using main_menu.Services;
 using Microsoft.AspNetCore.Authorization;
 
-namespace main_menu.controllers
+namespace main_menu.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
@@ -21,11 +21,11 @@ namespace main_menu.controllers
 
 		[AllowAnonymous]
 		[HttpPost("register")]
-		public async Task<AuthResponse> Register(RegistrationRequest request)
+		public async Task<AuthResponseDTO> Register(RegistrationRequestDTO request)
 		{
 			var user = await _userService.CreateUser(request);
 			var token = _tokenService.CreateToken(user.Id);
-			return new AuthResponse()
+			return new AuthResponseDTO()
 			{
 				Token = token
 			};
@@ -33,11 +33,11 @@ namespace main_menu.controllers
 
 		[AllowAnonymous]
 		[HttpPost("login")]
-		public async Task<AuthResponse> Login(LoginRequest request)
+		public async Task<AuthResponseDTO> Login(LoginRequestDTO request)
 		{
 			var user = await _userService.AuthUser(request);
 			var token = _tokenService.CreateToken(user.Id);
-			return new AuthResponse()
+			return new AuthResponseDTO()
 			{
 				Token = token
 			};

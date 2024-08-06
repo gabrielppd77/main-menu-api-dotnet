@@ -1,4 +1,4 @@
-namespace main_menu.utils
+namespace main_menu.Utils
 {
 	public static class Constants
 	{

@@ -1,6 +1,6 @@
-namespace main_menu.dtos
+namespace main_menu.DTOS
 {
-	public class CategoryCreate
+	public class CategoryCreateDTO
 	{
 		public required string Name { get; set; }
 		public int Order { get; set; }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace main_menu.configurations
+namespace main_menu.Configurations
 {
 	internal sealed class GlobalExceptionHandler : IExceptionHandler
 	{

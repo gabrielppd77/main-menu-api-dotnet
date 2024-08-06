@@ -1,6 +1,6 @@
-using main_menu.utils;
+using main_menu.Utils;
 
-namespace main_menu.configurations
+namespace main_menu.Configurations
 {
 	public static class AppConfig
 	{

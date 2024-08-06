@@ -1,14 +1,15 @@
-using main_menu.database.context;
-using main_menu.services;
-using main_menu.database.repositories;
+using main_menu.Contexts;
+using main_menu.Services;
+using main_menu.Database.repositories;
 
-namespace main_menu.configurations
+namespace main_menu.Configurations
 {
 	public static class DependencyResolveConfig
 	{
 		public static void AddContexts(this IServiceCollection services)
 		{
 			services.AddScoped<PgContext>();
+			services.AddScoped<UserContext>();
 		}
 
 		public static void AddServices(this IServiceCollection services)

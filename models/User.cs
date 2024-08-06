@@ -1,4 +1,4 @@
-namespace main_menu.models
+namespace main_menu.Models
 {
 	public class User
 	{

@@ -1,8 +1,8 @@
-using main_menu.database.context;
-using main_menu.models;
+using main_menu.Contexts;
+using main_menu.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace main_menu.database.repositories
+namespace main_menu.Database.repositories
 {
 	public class CategoryRepository
 	{
@@ -16,6 +16,11 @@ namespace main_menu.database.repositories
 		internal async Task AddCategory(Category category)
 		{
 			await _context.Category.AddAsync(category);
+		}
+
+		internal async Task<List<Category>> GetAllByUser(Guid userId)
+		{
+			return await _context.Category.Where(x => x.UserId == userId).ToListAsync();
 		}
 
 		internal async Task<Category?> GetById(Guid id)

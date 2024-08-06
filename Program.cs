@@ -1,4 +1,4 @@
-using main_menu.configurations;
+using main_menu.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 

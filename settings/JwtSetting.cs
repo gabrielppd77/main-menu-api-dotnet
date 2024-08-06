@@ -1,4 +1,4 @@
-namespace main_menu.settings
+namespace main_menu.Settings
 {
 	public class JwtSetting
 	{

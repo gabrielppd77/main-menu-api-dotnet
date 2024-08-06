@@ -1,9 +1,9 @@
-using main_menu.dtos;
-using main_menu.models;
-using main_menu.utils;
-using main_menu.database.repositories;
+using main_menu.DTOS;
+using main_menu.Models;
+using main_menu.Utils;
+using main_menu.Database.repositories;
 
-namespace main_menu.services
+namespace main_menu.Services
 {
 	public class UserService
 	{
@@ -14,7 +14,7 @@ namespace main_menu.services
 			_userRepository = userRepository;
 		}
 
-		public async Task<User> CreateUser(RegistrationRequest request)
+		public async Task<User> CreateUser(RegistrationRequestDTO request)
 		{
 			var userFinded = await _userRepository.FindByEmail(request.Email);
 
@@ -40,7 +40,7 @@ namespace main_menu.services
 		}
 
 
-		public async Task<User> AuthUser(LoginRequest request)
+		public async Task<User> AuthUser(LoginRequestDTO request)
 		{
 			var userFinded = await _userRepository.FindByEmail(request.Email);
 

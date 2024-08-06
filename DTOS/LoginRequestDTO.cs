@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace main_menu.dtos
+namespace main_menu.DTOS
 {
-	public class RegistrationRequest
+	public class LoginRequestDTO
 	{
 		[Required]
 		[EmailAddress]

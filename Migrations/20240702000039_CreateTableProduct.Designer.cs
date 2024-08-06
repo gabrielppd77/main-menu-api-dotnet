@@ -5,105 +5,105 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using main_menu.database.context;
+using main_menu.Contexts;
 
 #nullable disable
 
 namespace main_menu.Migrations
 {
-    [DbContext(typeof(PgContext))]
-    [Migration("20240702000039_CreateTableProduct")]
-    partial class CreateTableProduct
-    {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
+	[DbContext(typeof(PgContext))]
+	[Migration("20240702000039_CreateTableProduct")]
+	partial class CreateTableProduct
+	{
+		/// <inheritdoc />
+		protected override void BuildTargetModel(ModelBuilder modelBuilder)
+		{
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+			modelBuilder
+				.HasAnnotation("ProductVersion", "8.0.6")
+				.HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+			NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("main_menu.models.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+			modelBuilder.Entity("main_menu.models.Category", b =>
+				{
+					b.Property<Guid>("Id")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("Name")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
+					b.Property<int>("Order")
+						.HasColumnType("integer");
 
-                    b.HasKey("Id");
+					b.HasKey("Id");
 
-                    b.ToTable("Category");
-                });
+					b.ToTable("Category");
+				});
 
-            modelBuilder.Entity("main_menu.models.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+			modelBuilder.Entity("main_menu.models.Product", b =>
+				{
+					b.Property<Guid>("Id")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("uuid");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
+					b.Property<Guid>("CategoryId")
+						.HasColumnType("uuid");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("Description")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("ImageUrl")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("Name")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+					b.Property<decimal>("Price")
+						.HasColumnType("numeric");
 
-                    b.HasKey("Id");
+					b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+					b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
-                });
+					b.ToTable("Product");
+				});
 
-            modelBuilder.Entity("main_menu.models.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+			modelBuilder.Entity("main_menu.models.User", b =>
+				{
+					b.Property<Guid>("Id")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("uuid");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("Email")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
+					b.Property<string>("Password")
+						.IsRequired()
+						.HasColumnType("text");
 
-                    b.HasKey("Id");
+					b.HasKey("Id");
 
-                    b.ToTable("User");
-                });
+					b.ToTable("User");
+				});
 
-            modelBuilder.Entity("main_menu.models.Product", b =>
-                {
-                    b.HasOne("main_menu.models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+			modelBuilder.Entity("main_menu.models.Product", b =>
+				{
+					b.HasOne("main_menu.models.Category", "Category")
+						.WithMany()
+						.HasForeignKey("CategoryId")
+						.OnDelete(DeleteBehavior.Cascade)
+						.IsRequired();
 
-                    b.Navigation("Category");
-                });
+					b.Navigation("Category");
+				});
 #pragma warning restore 612, 618
-        }
-    }
+		}
+	}
 }

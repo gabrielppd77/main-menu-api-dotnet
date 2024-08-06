@@ -1,10 +1,10 @@
 using System.Text;
-using main_menu.settings;
-using main_menu.utils;
+using main_menu.Settings;
+using main_menu.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace main_menu.configurations
+namespace main_menu.Configurations
 {
 	public static class BuilderConfig
 	{
@@ -21,6 +21,7 @@ namespace main_menu.configurations
 			builder.Services.AddControllers();
 			builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 			builder.Services.AddProblemDetails();
+			builder.Services.AddHttpContextAccessor();
 			builder.Services.AddContexts();
 			builder.Services.AddServices();
 			builder.Services.AddRepositories();
