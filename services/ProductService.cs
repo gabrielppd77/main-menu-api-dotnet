@@ -16,6 +16,23 @@ namespace main_menu.Services
 			_userContext = userContext;
 		}
 
+		internal async Task<List<ProductResponseDTO>> GetAll()
+		{
+			var products = await _repository.GetAllByUser(_userContext.UserId);
+			return products
+				.Select(x => new ProductResponseDTO()
+				{
+					Id = x.Id,
+					Name = x.Name,
+					Description = x.Description,
+					ImageUrl = x.ImageUrl,
+					Order = x.Order,
+					Price = x.Price,
+					CategoryName = x.Category?.Name ?? ""
+				})
+				.ToList();
+		}
+
 		internal async Task Create(ProductCreateDTO request)
 		{
 			var product = new Product()

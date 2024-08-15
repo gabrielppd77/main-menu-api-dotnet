@@ -15,6 +15,12 @@ namespace main_menu.Controllers
 			_service = service;
 		}
 
+		[HttpGet]
+		public async Task<List<ProductResponseDTO>> GetAll()
+		{
+			return await _service.GetAll();
+		}
+
 		[HttpPost]
 		public async Task Create(ProductCreateDTO request)
 		{

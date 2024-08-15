@@ -20,7 +20,10 @@ namespace main_menu.Database.repositories
 
 		internal async Task<List<Category>> GetAllByUser(Guid userId)
 		{
-			return await _context.Category.Where(x => x.UserId == userId).ToListAsync();
+			return await _context.Category
+				.Where(x => x.UserId == userId)
+				.OrderBy(x => x.Order)
+				.ToListAsync();
 		}
 
 		internal async Task<Category?> GetById(Guid id)

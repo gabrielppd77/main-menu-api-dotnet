@@ -18,6 +18,15 @@ namespace main_menu.Database.repositories
 			await _context.Product.AddAsync(product);
 		}
 
+		internal async Task<List<Product>> GetAllByUser(Guid userId)
+		{
+			return await _context.Product
+				.Include(x => x.Category)
+				.Where(x => x.UserId == userId)
+				.OrderBy(x => x.Order)
+				.ToListAsync();
+		}
+
 		internal async Task<Product?> GetById(Guid id)
 		{
 			return await _context.Product.Where(x => x.Id == id).FirstOrDefaultAsync();
