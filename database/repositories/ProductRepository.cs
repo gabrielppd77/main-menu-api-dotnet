@@ -2,7 +2,7 @@ using main_menu.Contexts;
 using main_menu.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace main_menu.Database.repositories
+namespace main_menu.Database.Repositories
 {
 	public class ProductRepository
 	{

@@ -1,6 +1,6 @@
 using main_menu.Contexts;
 using main_menu.Services;
-using main_menu.Database.repositories;
+using main_menu.Database.Repositories;
 
 namespace main_menu.Configurations
 {

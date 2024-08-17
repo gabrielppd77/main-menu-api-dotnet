@@ -1,7 +1,7 @@
 using main_menu.DTOS.UserDTOS;
 using main_menu.Models;
 using main_menu.Utils;
-using main_menu.Database.repositories;
+using main_menu.Database.Repositories;
 
 namespace main_menu.Services
 {
