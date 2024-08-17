@@ -1,6 +1,6 @@
 using main_menu.Contexts;
 using main_menu.Database.repositories;
-using main_menu.DTOS;
+using main_menu.DTOS.ProductDTO;
 using main_menu.Models;
 
 namespace main_menu.Services

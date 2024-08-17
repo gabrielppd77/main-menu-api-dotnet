@@ -1,4 +1,4 @@
-using main_menu.DTOS;
+using main_menu.DTOS.UserDTOS;
 using main_menu.Models;
 using main_menu.Utils;
 using main_menu.Database.repositories;

@@ -1,5 +1,5 @@
 using main_menu.Database.repositories;
-using main_menu.DTOS;
+using main_menu.DTOS.UserDTOS;
 using main_menu.Services;
 using Moq;
 using Xunit;

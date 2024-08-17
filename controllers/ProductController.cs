@@ -1,4 +1,4 @@
-using main_menu.DTOS;
+using main_menu.DTOS.ProductDTO;
 using main_menu.Services;
 using Microsoft.AspNetCore.Mvc;
 

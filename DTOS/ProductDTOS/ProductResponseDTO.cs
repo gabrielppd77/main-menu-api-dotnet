@@ -1,5 +1,5 @@
 
-namespace main_menu.DTOS
+namespace main_menu.DTOS.ProductDTO
 {
 	public class ProductResponseDTO
 	{

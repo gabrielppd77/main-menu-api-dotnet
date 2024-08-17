@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-using main_menu.DTOS;
+using main_menu.DTOS.UserDTOS;
 using main_menu.Services;
 using Microsoft.AspNetCore.Authorization;
 

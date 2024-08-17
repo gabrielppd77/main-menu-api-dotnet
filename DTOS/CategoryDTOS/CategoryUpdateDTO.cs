@@ -1,4 +1,4 @@
-namespace main_menu.DTOS
+namespace main_menu.DTOS.CategoryDTOS
 {
 	public class CategoryUpdateDTO
 	{
