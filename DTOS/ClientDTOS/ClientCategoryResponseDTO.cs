@@ -1,14 +1,14 @@
 using main_menu.Models;
 
-namespace main_menu.DTOS.CategoryDTOS
+namespace main_menu.DTOS.ClientDTOS
 {
-	public class CategoryResponseDTO
+	public class ClientCategoryResponseDTO
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public int Order { get; set; }
 
-		public CategoryResponseDTO(Category category)
+		public ClientCategoryResponseDTO(Category category)
 		{
 			Id = category.Id;
 			Name = category.Name;

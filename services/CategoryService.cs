@@ -19,14 +19,7 @@ namespace main_menu.Services
 		internal async Task<List<CategoryResponseDTO>> GetAll()
 		{
 			var categories = await _repository.GetAllByUser(_userContext.UserId);
-			return categories
-				.Select(x => new CategoryResponseDTO()
-				{
-					Id = x.Id,
-					Name = x.Name,
-					Order = x.Order,
-				})
-				.ToList();
+			return categories.Select(x => new CategoryResponseDTO(x)).ToList();
 		}
 
 		internal async Task Create(CategoryCreateDTO request)
