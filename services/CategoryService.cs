@@ -22,7 +22,7 @@ namespace main_menu.Services
 			return categories.Select(x => new CategoryResponseDTO(x)).ToList();
 		}
 
-		internal async Task Create(CategoryCreateDTO request)
+		internal async Task Create(CategoryRequestDTO request)
 		{
 			var category = new Category()
 			{
@@ -35,7 +35,7 @@ namespace main_menu.Services
 			await _repository.SaveChanges();
 		}
 
-		internal async Task Update(Guid id, CategoryUpdateDTO request)
+		internal async Task Update(Guid id, CategoryRequestDTO request)
 		{
 			var category = await _repository.GetById(id);
 

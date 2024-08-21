@@ -22,13 +22,13 @@ namespace main_menu.Controllers
 		}
 
 		[HttpPost]
-		public async Task Create(ProductCreateDTO request)
+		public async Task Create(ProductRequestDTO request)
 		{
 			await _service.Create(request);
 		}
 
 		[HttpPut("{id}")]
-		public async Task Update(Guid id, ProductUpdateDTO request)
+		public async Task Update(Guid id, ProductRequestDTO request)
 		{
 			await _service.Update(id, request);
 		}

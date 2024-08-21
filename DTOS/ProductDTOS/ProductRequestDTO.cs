@@ -1,6 +1,6 @@
 namespace main_menu.DTOS.ProductDTO
 {
-	public class ProductCreateDTO
+	public class ProductRequestDTO
 	{
 		public required string Name { get; set; }
 		public required string Description { get; set; }

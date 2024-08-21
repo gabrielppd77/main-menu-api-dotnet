@@ -22,7 +22,7 @@ namespace main_menu.Services
 			return products.Select(x => new ProductResponseDTO(x)).ToList();
 		}
 
-		internal async Task Create(ProductCreateDTO request)
+		internal async Task Create(ProductRequestDTO request)
 		{
 			var product = new Product()
 			{
@@ -39,7 +39,7 @@ namespace main_menu.Services
 			await _repository.SaveChanges();
 		}
 
-		internal async Task Update(Guid id, ProductUpdateDTO request)
+		internal async Task Update(Guid id, ProductRequestDTO request)
 		{
 			var product = await _repository.GetById(id);
 

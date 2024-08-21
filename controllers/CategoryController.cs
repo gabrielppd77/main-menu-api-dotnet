@@ -22,13 +22,13 @@ namespace main_menu.Controllers
 		}
 
 		[HttpPost]
-		public async Task Create(CategoryCreateDTO request)
+		public async Task Create(CategoryRequestDTO request)
 		{
 			await _service.Create(request);
 		}
 
 		[HttpPut("{id}")]
-		public async Task Update(Guid id, CategoryUpdateDTO request)
+		public async Task Update(Guid id, CategoryRequestDTO request)
 		{
 			await _service.Update(id, request);
 		}
