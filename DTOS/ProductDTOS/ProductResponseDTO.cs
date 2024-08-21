@@ -5,6 +5,15 @@ namespace main_menu.DTOS.ProductDTO
 {
 	public class ProductResponseDTO
 	{
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public string ImageUrl { get; set; }
+		public int Order { get; set; }
+		public decimal Price { get; set; }
+		public Guid CategoryId { get; set; }
+		public string CategoryName { get; set; }
+
 		public ProductResponseDTO(Product product)
 		{
 			Id = product.Id;
@@ -13,15 +22,8 @@ namespace main_menu.DTOS.ProductDTO
 			ImageUrl = product.ImageUrl;
 			Order = product.Order;
 			Price = product.Price;
+			CategoryId = product.Category?.Id ?? default;
 			CategoryName = product.Category?.Name ?? "";
 		}
-
-		public Guid Id { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public string ImageUrl { get; set; }
-		public int Order { get; set; }
-		public decimal Price { get; set; }
-		public string CategoryName { get; set; }
 	}
 }
