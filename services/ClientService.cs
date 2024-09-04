@@ -21,16 +21,13 @@ namespace main_menu.Services
 
 			foreach (var category in categories)
 			{
-				var categoryData = new ClientCategoryResponseDTO(category);
-
 				var productsData = products
 					.Where(x => x.CategoryId == category.Id)
 					.Select(x => new ClientProductResponseDTO(x))
 					.ToList();
 
-				data.Add(new ClientResponseDTO()
+				data.Add(new ClientResponseDTO(category)
 				{
-					Category = categoryData,
 					Products = productsData
 				});
 			}

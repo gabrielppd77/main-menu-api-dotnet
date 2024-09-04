@@ -18,6 +18,7 @@ namespace main_menu.Configurations
 			services.AddScoped<TokenService>();
 			services.AddScoped<CategoryService>();
 			services.AddScoped<ProductService>();
+			services.AddScoped<ClientService>();
 		}
 
 		public static void AddRepositories(this IServiceCollection services)
@@ -25,6 +26,7 @@ namespace main_menu.Configurations
 			services.AddScoped<UserRepository>();
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();
+			services.AddScoped<ClientRepository>();
 		}
 	}
 }
