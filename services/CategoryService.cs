@@ -27,7 +27,7 @@ namespace main_menu.Services
 			var category = new Category()
 			{
 				Id = Guid.NewGuid(),
-				UserId = _userContext.UserId,
+				// UserId = _userContext.UserId,
 				Name = request.Name,
 				Order = request.Order
 			};

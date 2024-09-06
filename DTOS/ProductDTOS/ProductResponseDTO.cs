@@ -8,7 +8,7 @@ namespace main_menu.DTOS.ProductDTO
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string? ImageUrl { get; set; }
+		public string? UrlImage { get; set; }
 		public int Order { get; set; }
 		public decimal Price { get; set; }
 		public Guid CategoryId { get; set; }
@@ -19,11 +19,12 @@ namespace main_menu.DTOS.ProductDTO
 			Id = product.Id;
 			Name = product.Name;
 			Description = product.Description;
-			ImageUrl = product.ImageUrl;
+			UrlImage = product.UrlImage;
 			Order = product.Order;
 			Price = product.Price;
-			CategoryId = product.Category?.Id ?? default;
-			CategoryName = product.Category?.Name ?? "";
+			// CategoryId = product.Category?.Id ?? default;
+			// CategoryName = product.Category?.Name ?? "";
+			CategoryName = "";
 		}
 	}
 }

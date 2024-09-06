@@ -1,3 +1,4 @@
+using main_menu.Database.Map;
 using main_menu.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ namespace main_menu.Contexts
 		}
 
 		public DbSet<User> User { get; set; }
+		public DbSet<Company> Company { get; set; }
 		public DbSet<Category> Category { get; set; }
 		public DbSet<Product> Product { get; set; }
 
@@ -25,6 +27,16 @@ namespace main_menu.Contexts
 			}
 			optionsBuilder.UseNpgsql(connectionString);
 			base.OnConfiguring(optionsBuilder);
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.ApplyConfiguration(new User_Map());
+			modelBuilder.ApplyConfiguration(new Company_Map());
+			modelBuilder.ApplyConfiguration(new Category_Map());
+			modelBuilder.ApplyConfiguration(new Product_Map());
+
+			base.OnModelCreating(modelBuilder);
 		}
 	}
 };

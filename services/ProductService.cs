@@ -27,11 +27,11 @@ namespace main_menu.Services
 			var product = new Product()
 			{
 				Id = Guid.NewGuid(),
-				UserId = _userContext.UserId,
+				// UserId = _userContext.UserId,
 				CategoryId = request.CategoryId,
 				Name = request.Name,
 				Description = request.Description,
-				ImageUrl = request.ImageUrl,
+				UrlImage = request.UrlImage,
 				Order = request.Order,
 				Price = request.Price,
 			};
@@ -51,7 +51,7 @@ namespace main_menu.Services
 			product.CategoryId = request.CategoryId;
 			product.Name = request.Name;
 			product.Description = request.Description;
-			product.ImageUrl = request.ImageUrl;
+			product.UrlImage = request.UrlImage;
 			product.Order = request.Order;
 			product.Price = request.Price;
 

@@ -15,12 +15,14 @@ namespace main_menu.Database.Repositories
 
 		internal async Task<List<Category>> GetAllCategories()
 		{
-			return await _context.Category.ToListAsync();
+			throw new Exception("");
+			// return await _context.Category.ToListAsync();
 		}
 
 		internal async Task<List<Product>> GetAllProducts()
 		{
-			return await _context.Product.ToListAsync();
+			throw new Exception("");
+			// return await _context.Product.ToListAsync();
 		}
 	}
 }
