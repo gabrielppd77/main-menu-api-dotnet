@@ -8,8 +8,8 @@ namespace main_menu.Database.Map
 	{
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
-			builder.Property(x => x.Email).HasMaxLength(200);
-			builder.Property(x => x.Password).HasMaxLength(200);
+			builder.Property(x => x.Email).HasMaxLength(100);
+			builder.Property(x => x.Password).HasMaxLength(100);
 		}
 	}
 }

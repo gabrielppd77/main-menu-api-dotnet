@@ -8,7 +8,7 @@ namespace main_menu.Database.Map
 	{
 		public void Configure(EntityTypeBuilder<Company> builder)
 		{
-			builder.Property(x => x.Name).HasMaxLength(200);
+			builder.Property(x => x.Name).HasMaxLength(100);
 			builder.Property(x => x.UrlSite).HasMaxLength(999);
 		}
 	}

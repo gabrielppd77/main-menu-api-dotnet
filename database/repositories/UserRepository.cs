@@ -18,6 +18,11 @@ namespace main_menu.Database.Repositories
 			await _context.User.AddAsync(user);
 		}
 
+		internal async Task AddCompany(Company company)
+		{
+			await _context.Company.AddAsync(company);
+		}
+
 		internal async Task<User?> FindByEmail(string email)
 		{
 			return await _context.User.Where(x => x.Email == email).FirstOrDefaultAsync();

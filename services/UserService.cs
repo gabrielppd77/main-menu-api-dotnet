@@ -32,7 +32,16 @@ namespace main_menu.Services
 				Password = hashedPassword,
 			};
 
+			var company = new Company
+			{
+				Id = Guid.NewGuid(),
+				UserId = user.Id,
+				Name = request.CompanyName,
+				UrlSite = request.UrlSite,
+			};
+
 			await _userRepository.AddUser(user);
+			await _userRepository.AddCompany(company);
 
 			await _userRepository.SaveChanges();
 
