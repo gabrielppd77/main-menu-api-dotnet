@@ -9,13 +9,13 @@ namespace main_menu.Configurations
 		public static void AddContexts(this IServiceCollection services)
 		{
 			services.AddScoped<PgContext>();
-			services.AddScoped<UserContext>();
 		}
 
 		public static void AddServices(this IServiceCollection services)
 		{
 			services.AddScoped<UserService>();
 			services.AddScoped<TokenService>();
+			services.AddScoped<HttpContextService>();
 			services.AddScoped<CategoryService>();
 			services.AddScoped<ProductService>();
 			services.AddScoped<ClientService>();
@@ -24,6 +24,7 @@ namespace main_menu.Configurations
 		public static void AddRepositories(this IServiceCollection services)
 		{
 			services.AddScoped<UserRepository>();
+			services.AddScoped<HttpContextRepository>();
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();
 			services.AddScoped<ClientRepository>();
