@@ -1,37 +1,36 @@
-using main_menu.Contexts;
 using main_menu.Database.Repositories;
 using main_menu.DTOS.CategoryDTOS;
-using main_menu.Models;
 
 namespace main_menu.Services
 {
 	public class CategoryService
 	{
 		private readonly CategoryRepository _repository;
-		private readonly UserContext _userContext;
+		private readonly HttpContextService _httpContextService;
 
-		public CategoryService(CategoryRepository repository, UserContext userContext)
+		public CategoryService(CategoryRepository repository, HttpContextService httpContextService)
 		{
 			_repository = repository;
-			_userContext = userContext;
+			_httpContextService = httpContextService;
 		}
 
 		internal async Task<List<CategoryResponseDTO>> GetAll()
 		{
-			var categories = await _repository.GetAllByUser(_userContext.UserId);
-			return categories.Select(x => new CategoryResponseDTO(x)).ToList();
+			// var categories = await _repository.GetAllByUser(_httpContextService.UserId);
+			// return categories.Select(x => new CategoryResponseDTO(x)).ToList();
+			throw new Exception("");
 		}
 
 		internal async Task Create(CategoryRequestDTO request)
 		{
-			var category = new Category()
-			{
-				Id = Guid.NewGuid(),
-				// UserId = _userContext.UserId,
-				Name = request.Name,
-				Order = request.Order
-			};
-			await _repository.AddCategory(category);
+			// var category = new Category()
+			// {
+			// 	Id = Guid.NewGuid(),
+			// 	// UserId = _userContext.UserId,
+			// 	Name = request.Name,
+			// 	Order = request.Order
+			// };
+			// await _repository.AddCategory(category);
 			await _repository.SaveChanges();
 		}
 

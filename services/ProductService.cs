@@ -1,4 +1,3 @@
-using main_menu.Contexts;
 using main_menu.Database.Repositories;
 using main_menu.DTOS.ProductDTO;
 using main_menu.Models;
@@ -8,34 +7,35 @@ namespace main_menu.Services
 	public class ProductService
 	{
 		private readonly ProductRepository _repository;
-		private readonly UserContext _userContext;
+		private readonly HttpContextService _httpContextService;
 
-		public ProductService(ProductRepository repository, UserContext userContext)
+		public ProductService(ProductRepository repository, HttpContextService httpContextService)
 		{
 			_repository = repository;
-			_userContext = userContext;
+			_httpContextService = httpContextService;
 		}
 
 		internal async Task<List<ProductResponseDTO>> GetAll()
 		{
-			var products = await _repository.GetAllByUser(_userContext.UserId);
-			return products.Select(x => new ProductResponseDTO(x)).ToList();
+			// var products = await _repository.GetAllByUser(_userContext.UserId);
+			// return products.Select(x => new ProductResponseDTO(x)).ToList();
+			throw new Exception("");
 		}
 
 		internal async Task Create(ProductRequestDTO request)
 		{
-			var product = new Product()
-			{
-				Id = Guid.NewGuid(),
-				// UserId = _userContext.UserId,
-				CategoryId = request.CategoryId,
-				Name = request.Name,
-				Description = request.Description,
-				UrlImage = request.UrlImage,
-				Order = request.Order,
-				Price = request.Price,
-			};
-			await _repository.AddProduct(product);
+			// var product = new Product()
+			// {
+			// 	Id = Guid.NewGuid(),
+			// 	// UserId = _userContext.UserId,
+			// 	CategoryId = request.CategoryId,
+			// 	Name = request.Name,
+			// 	Description = request.Description,
+			// 	UrlImage = request.UrlImage,
+			// 	Order = request.Order,
+			// 	Price = request.Price,
+			// };
+			// await _repository.AddProduct(product);
 			await _repository.SaveChanges();
 		}
 
