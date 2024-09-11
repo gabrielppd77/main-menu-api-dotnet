@@ -24,7 +24,6 @@ namespace main_menu.DTOS.ProductDTO
 			Price = product.Price;
 			CategoryId = product.Category?.Id ?? default;
 			CategoryName = product.Category?.Name ?? "";
-			CategoryName = "";
 		}
 	}
 }
