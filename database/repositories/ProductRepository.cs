@@ -15,30 +15,26 @@ namespace main_menu.Database.Repositories
 
 		internal async Task AddProduct(Product product)
 		{
-			throw new Exception("");
-			// await _context.Product.AddAsync(product);
+			await _context.Product.AddAsync(product);
 		}
 
-		internal async Task<List<Product>> GetAllByUser(Guid userId)
+		internal async Task<List<Product>> GetAllByCompany(Guid companyId)
 		{
-			throw new Exception("");
-			// return await _context.Product
-			// 	// .Include(x => x.Category)
-			// 	// .Where(x => x.UserId == userId)
-			// 	.OrderBy(x => x.Order)
-			// 	.ToListAsync();
+			return await _context.Product
+				.Include(x => x.Category)
+				.Where(x => x.CompanyId == companyId)
+				.OrderBy(x => x.Order)
+				.ToListAsync();
 		}
 
 		internal async Task<Product?> GetById(Guid id)
 		{
-			throw new Exception("");
-			// return await _context.Product.Where(x => x.Id == id).FirstOrDefaultAsync();
+			return await _context.Product.Where(x => x.Id == id).FirstOrDefaultAsync();
 		}
 
 		internal void RemoveProduct(Product product)
 		{
-			throw new Exception("");
-			// _context.Product.Remove(product);
+			_context.Product.Remove(product);
 		}
 
 		internal async Task SaveChanges()

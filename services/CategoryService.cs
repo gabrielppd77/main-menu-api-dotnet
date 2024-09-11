@@ -1,5 +1,6 @@
 using main_menu.Database.Repositories;
 using main_menu.DTOS.CategoryDTOS;
+using main_menu.Models;
 
 namespace main_menu.Services
 {
@@ -16,21 +17,22 @@ namespace main_menu.Services
 
 		internal async Task<List<CategoryResponseDTO>> GetAll()
 		{
-			// var categories = await _repository.GetAllByUser(_httpContextService.UserId);
-			// return categories.Select(x => new CategoryResponseDTO(x)).ToList();
-			throw new Exception("");
+			var companyId = await _httpContextService.GetCompanyId();
+			var categories = await _repository.GetAllByCompany(companyId);
+			return categories.Select(x => new CategoryResponseDTO(x)).ToList();
 		}
 
 		internal async Task Create(CategoryRequestDTO request)
 		{
-			// var category = new Category()
-			// {
-			// 	Id = Guid.NewGuid(),
-			// 	// UserId = _userContext.UserId,
-			// 	Name = request.Name,
-			// 	Order = request.Order
-			// };
-			// await _repository.AddCategory(category);
+			var companyId = await _httpContextService.GetCompanyId();
+			var category = new Category()
+			{
+				Id = Guid.NewGuid(),
+				CompanyId = companyId,
+				Name = request.Name,
+				Order = request.Order,
+			};
+			await _repository.AddCategory(category);
 			await _repository.SaveChanges();
 		}
 

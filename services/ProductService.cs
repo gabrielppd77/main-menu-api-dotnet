@@ -17,25 +17,26 @@ namespace main_menu.Services
 
 		internal async Task<List<ProductResponseDTO>> GetAll()
 		{
-			// var products = await _repository.GetAllByUser(_userContext.UserId);
-			// return products.Select(x => new ProductResponseDTO(x)).ToList();
-			throw new Exception("");
+			var companyId = await _httpContextService.GetCompanyId();
+			var products = await _repository.GetAllByCompany(companyId);
+			return products.Select(x => new ProductResponseDTO(x)).ToList();
 		}
 
 		internal async Task Create(ProductRequestDTO request)
 		{
-			// var product = new Product()
-			// {
-			// 	Id = Guid.NewGuid(),
-			// 	// UserId = _userContext.UserId,
-			// 	CategoryId = request.CategoryId,
-			// 	Name = request.Name,
-			// 	Description = request.Description,
-			// 	UrlImage = request.UrlImage,
-			// 	Order = request.Order,
-			// 	Price = request.Price,
-			// };
-			// await _repository.AddProduct(product);
+			var companyId = await _httpContextService.GetCompanyId();
+			var product = new Product()
+			{
+				Id = Guid.NewGuid(),
+				CompanyId = companyId,
+				CategoryId = request.CategoryId,
+				Name = request.Name,
+				Description = request.Description,
+				UrlImage = request.UrlImage,
+				Order = request.Order,
+				Price = request.Price,
+			};
+			await _repository.AddProduct(product);
 			await _repository.SaveChanges();
 		}
 

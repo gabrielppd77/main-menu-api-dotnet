@@ -15,29 +15,25 @@ namespace main_menu.Database.Repositories
 
 		internal async Task AddCategory(Category category)
 		{
-			throw new Exception("");
-			// await _context.Category.AddAsync(category);
+			await _context.Category.AddAsync(category);
 		}
 
-		internal async Task<List<Category>> GetAllByUser(Guid userId)
+		internal async Task<List<Category>> GetAllByCompany(Guid companyId)
 		{
-			throw new Exception("");
-			// return await _context.Category
-			// 	// .Where(x => x.UserId == userId)
-			// 	.OrderBy(x => x.Order)
-			// 	.ToListAsync();
+			return await _context.Category
+				.Where(x => x.CompanyId == companyId)
+				.OrderBy(x => x.Order)
+				.ToListAsync();
 		}
 
 		internal async Task<Category?> GetById(Guid id)
 		{
-			throw new Exception("");
-			// return await _context.Category.Where(x => x.Id == id).FirstOrDefaultAsync();
+			return await _context.Category.Where(x => x.Id == id).FirstOrDefaultAsync();
 		}
 
 		internal void RemoveCategory(Category category)
 		{
-			throw new Exception("");
-			// _context.Category.Remove(category);
+			_context.Category.Remove(category);
 		}
 
 		internal async Task SaveChanges()

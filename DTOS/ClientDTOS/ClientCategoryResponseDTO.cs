@@ -4,9 +4,9 @@ namespace main_menu.DTOS.ClientDTOS
 {
 	public class ClientCategoryResponseDTO
 	{
-		public required Guid Id { get; set; }
-		public required string Name { get; set; }
-		public required int Order { get; set; }
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public int Order { get; set; }
 
 		public ClientCategoryResponseDTO(Category category)
 		{
