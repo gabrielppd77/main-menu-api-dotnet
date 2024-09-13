@@ -13,14 +13,13 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
-		internal async Task<List<Category>> GetAllCategories()
+		internal async Task<Company?> GetMainData(string urlSite)
 		{
-			return await _context.Category.ToListAsync();
-		}
-
-		internal async Task<List<Product>> GetAllProducts()
-		{
-			return await _context.Product.ToListAsync();
+			return await _context.Company
+				.AsNoTracking()
+				.Include(x => x.Categories).ThenInclude(x => x.Products)
+				.Where(x => x.UrlSite == urlSite)
+				.FirstOrDefaultAsync();
 		}
 	}
 }

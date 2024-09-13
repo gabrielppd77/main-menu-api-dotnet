@@ -1,5 +1,6 @@
 using main_menu.Database.Repositories;
 using main_menu.DTOS.ClientDTOS;
+using main_menu.Models;
 
 namespace main_menu.Services
 {
@@ -12,27 +13,43 @@ namespace main_menu.Services
 			_repository = repository;
 		}
 
-		internal async Task<List<ClientResponseDTO>> GetAll()
+		internal async Task<ClientResponseDTO> GetMainData(string urlSite)
 		{
-			var categories = await _repository.GetAllCategories();
-			var products = await _repository.GetAllProducts();
+			var company = await _repository.GetMainData(urlSite);
 
-			var data = new List<ClientResponseDTO>();
-
-			foreach (var category in categories)
+			if (company == null)
 			{
-				var productsData = products
-					.Where(x => x.CategoryId == category.Id)
-					.Select(x => new ClientProductResponseDTO(x))
-					.ToList();
+				throw new BadHttpRequestException("Não foi possível encontrar a empresa.");
+			}
 
-				data.Add(new ClientResponseDTO(category)
+			var categories = new List<ClientCategoryResponseDTO>();
+
+			foreach (var category in company.Categories)
+			{
+				var products = category.Products.Select(x => new ClientProductResponseDTO()
 				{
-					Products = productsData
+					Id = x.Id,
+					Name = x.Name,
+					Description = x.Description,
+					UrlImage = x.UrlImage,
+					Order = x.Order,
+					Price = x.Price,
+				}).ToList();
+
+				categories.Add(new ClientCategoryResponseDTO()
+				{
+					Id = category.Id,
+					Name = category.Name,
+					Order = category.Order,
+					Products = products,
 				});
 			}
 
-			return data;
+			return new ClientResponseDTO()
+			{
+				CompanyName = company.Name,
+				Categories = categories,
+			};
 		}
 	}
 }

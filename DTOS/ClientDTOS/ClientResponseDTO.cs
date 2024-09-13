@@ -1,13 +1,8 @@
-using main_menu.Models;
-
 namespace main_menu.DTOS.ClientDTOS
 {
-	public class ClientResponseDTO : ClientCategoryResponseDTO
+	public class ClientResponseDTO
 	{
-		public ClientResponseDTO(Category category) : base(category)
-		{
-		}
-
-		public required List<ClientProductResponseDTO> Products { get; set; }
+		public required string CompanyName { get; set; }
+		public required List<ClientCategoryResponseDTO> Categories { get; set; }
 	}
 }
