@@ -8,6 +8,6 @@ namespace main_menu.Models
 		public required int Order { get; set; }
 
 		public virtual Company? Company { get; set; }
-		public virtual ICollection<Product>? Products { get; set; }
+		public virtual List<Product>? Products { get; set; }
 	}
 }

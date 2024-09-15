@@ -8,7 +8,7 @@ namespace main_menu.Models
 		public required string UrlSite { get; set; }
 
 		public virtual User? User { get; set; }
-		public virtual ICollection<Category>? Categories { get; set; }
-		public virtual ICollection<Product>? Products { get; set; }
+		public virtual List<Category>? Categories { get; set; }
+		public virtual List<Product>? Products { get; set; }
 	}
 }

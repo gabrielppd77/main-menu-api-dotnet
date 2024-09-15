@@ -1,5 +1,3 @@
-using main_menu.Models;
-
 namespace main_menu.DTOS.ClientDTOS
 {
 	public class ClientProductResponseDTO
