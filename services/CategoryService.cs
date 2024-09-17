@@ -19,7 +19,12 @@ namespace main_menu.Services
 		{
 			var companyId = await _httpContextService.GetCompanyId();
 			var categories = await _repository.GetAllByCompany(companyId);
-			return categories.Select(x => new CategoryResponseDTO(x)).ToList();
+			return categories.Select(x => new CategoryResponseDTO()
+			{
+				Id = x.Id,
+				Name = x.Name,
+				Order = x.Order
+			}).ToList();
 		}
 
 		internal async Task Create(CategoryRequestDTO request)

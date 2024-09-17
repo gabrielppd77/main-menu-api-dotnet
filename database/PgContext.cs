@@ -2,7 +2,7 @@ using main_menu.Database.Map;
 using main_menu.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace main_menu.Contexts
+namespace main_menu.Database
 {
 	public class PgContext : DbContext
 	{

@@ -21,7 +21,25 @@ namespace main_menu.Services
 				throw new BadHttpRequestException("Não foi possível encontrar a empresa.");
 			}
 
-			return company;
+			return new ClientResponseDTO()
+			{
+				CompanyName = company.Name,
+				Categories = company.Categories!.Select(cat => new ClientCategoryResponseDTO()
+				{
+					Id = cat.Id,
+					Name = cat.Name,
+					Order = cat.Order,
+					Products = cat.Products!.Select(prod => new ClientProductResponseDTO()
+					{
+						Id = prod.Id,
+						Name = prod.Name,
+						Description = prod.Description,
+						UrlImage = prod.UrlImage,
+						Order = prod.Order,
+						Price = prod.Price,
+					}).ToList()
+				}).ToList()
+			};
 		}
 	}
 }
