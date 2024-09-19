@@ -23,6 +23,7 @@ namespace main_menu.Services
 
 			return new ClientResponseDTO()
 			{
+				CompanyId = company.Id,
 				CompanyName = company.Name,
 				CompanyDescription = company.Description,
 				CompanyUrlImage = company.UrlImage,

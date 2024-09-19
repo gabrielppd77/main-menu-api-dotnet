@@ -16,6 +16,7 @@ namespace main_menu.Configurations
 			services.AddScoped<UserService>();
 			services.AddScoped<TokenService>();
 			services.AddScoped<HttpContextService>();
+			services.AddScoped<CompanyService>();
 			services.AddScoped<CategoryService>();
 			services.AddScoped<ProductService>();
 			services.AddScoped<ClientService>();
@@ -25,6 +26,7 @@ namespace main_menu.Configurations
 		{
 			services.AddScoped<UserRepository>();
 			services.AddScoped<HttpContextRepository>();
+			services.AddScoped<CompanyRepository>();
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();
 			services.AddScoped<ClientRepository>();
