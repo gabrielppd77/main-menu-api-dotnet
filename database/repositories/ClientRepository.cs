@@ -12,13 +12,12 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
-		internal async Task<Company?> GetMainData(string urlSite)
+		internal async Task<Company?> GetMainData()
 		{
 			return await _context.Company
 				.AsNoTracking()
 				.Include(x => x.Categories!)
 				.ThenInclude(x => x.Products)
-				.Where(x => x.UrlSite == urlSite)
 				.FirstOrDefaultAsync();
 		}
 	}

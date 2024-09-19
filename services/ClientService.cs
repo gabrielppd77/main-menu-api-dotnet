@@ -12,9 +12,9 @@ namespace main_menu.Services
 			_repository = repository;
 		}
 
-		internal async Task<ClientResponseDTO> GetMainData(string urlSite)
+		internal async Task<ClientResponseDTO> GetMainData()
 		{
-			var company = await _repository.GetMainData(urlSite);
+			var company = await _repository.GetMainData();
 
 			if (company == null)
 			{
@@ -24,6 +24,8 @@ namespace main_menu.Services
 			return new ClientResponseDTO()
 			{
 				CompanyName = company.Name,
+				CompanyDescription = company.Description,
+				CompanyUrlImage = company.UrlImage,
 				Categories = company.Categories!.Select(cat => new ClientCategoryResponseDTO()
 				{
 					Id = cat.Id,

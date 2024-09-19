@@ -18,9 +18,9 @@ namespace main_menu.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ClientResponseDTO> GetMainData(string urlSite)
+		public async Task<ClientResponseDTO> GetMainData()
 		{
-			return await _service.GetMainData(urlSite);
+			return await _service.GetMainData();
 		}
 	}
 }
