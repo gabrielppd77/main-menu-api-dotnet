@@ -61,11 +61,16 @@ namespace main_menu.Configurations
 
 		public static void AddCorsPolicy(this WebApplicationBuilder builder)
 		{
-			var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
+			var allowedOriginsString = builder.Configuration["CorsSettings:AllowedOrigins"];
+			if (string.IsNullOrEmpty(allowedOriginsString))
+			{
+				throw new InvalidOperationException("Allowed Origins string not found.");
+			}
+			var allowedOrigins = allowedOriginsString.Split(',');
 			builder.Services.AddCors(options =>
 			{
 				options.AddPolicy(Constants.CorsPolicy,
-					builder => builder.WithOrigins(allowedOrigins ?? [])
+					builder => builder.WithOrigins(allowedOrigins)
 										.AllowAnyMethod()
 										.AllowAnyHeader()
 										.AllowCredentials());
