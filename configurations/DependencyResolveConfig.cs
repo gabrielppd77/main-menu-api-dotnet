@@ -20,6 +20,7 @@ namespace main_menu.Configurations
 			services.AddScoped<CategoryService>();
 			services.AddScoped<ProductService>();
 			services.AddScoped<ClientService>();
+			services.AddScoped<ProjectService>();
 		}
 
 		public static void AddRepositories(this IServiceCollection services)
@@ -30,6 +31,7 @@ namespace main_menu.Configurations
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();
 			services.AddScoped<ClientRepository>();
+			services.AddScoped<ProjectRepository>();
 		}
 	}
 }

@@ -29,7 +29,8 @@ namespace main_menu.Configurations
 
 		public static void AddConfigs(this WebApplicationBuilder builder)
 		{
-			builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSetting"));
+			builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection(nameof(JwtSetting)));
+			builder.Services.Configure<MigrationsSetting>(builder.Configuration.GetSection(nameof(MigrationsSetting)));
 		}
 
 		public static void AddJWT(this WebApplicationBuilder builder)
