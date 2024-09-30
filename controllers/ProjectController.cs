@@ -1,4 +1,5 @@
 using main_menu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace main_menu.Controllers
@@ -13,6 +14,7 @@ namespace main_menu.Controllers
 			_service = service;
 		}
 
+		[AllowAnonymous]
 		[HttpPut("run-migrations")]
 		public async Task RunMigrations(string password)
 		{
