@@ -12,9 +12,9 @@ namespace main_menu.Services
 			_repository = repository;
 		}
 
-		internal async Task<ClientResponseDTO> GetMainData()
+		internal async Task<ClientResponseDTO> GetCompanyData(string companyPath)
 		{
-			var company = await _repository.GetMainData();
+			var company = await _repository.GetCompanyData(companyPath);
 
 			if (company == null)
 			{

@@ -17,10 +17,10 @@ namespace main_menu.Controllers
 			_service = service;
 		}
 
-		[HttpGet]
-		public async Task<ClientResponseDTO> GetMainData()
+		[HttpGet("get-company-data")]
+		public async Task<ClientResponseDTO> GetCompanyData(string companyPath)
 		{
-			return await _service.GetMainData();
+			return await _service.GetCompanyData(companyPath);
 		}
 	}
 }

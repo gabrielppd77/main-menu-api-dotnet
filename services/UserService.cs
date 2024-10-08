@@ -37,6 +37,7 @@ namespace main_menu.Services
 				Id = Guid.NewGuid(),
 				UserId = user.Id,
 				Name = request.CompanyName,
+				Path = request.CompanyName.ToLower().Replace(" ", "-")
 			};
 
 			await _userRepository.AddUser(user);

@@ -12,12 +12,12 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
-		internal async Task<Company?> GetMainData()
+		internal async Task<Company?> GetCompanyData(string companyPath)
 		{
 			return await _context.Company
 				.AsNoTracking()
-				.Include(x => x.Categories!)
-				.ThenInclude(x => x.Products)
+				.Include(x => x.Categories!.OrderBy(d => d.Order)).ThenInclude(x => x.Products!.OrderBy(d => d.Order))
+				.Where(x => x.Path == companyPath)
 				.FirstOrDefaultAsync();
 		}
 	}
