@@ -1,0 +1,37 @@
+name: Deploy API to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar Docker
+        run: |
+          echo "Construindo a imagem Docker..."
+          docker build -t ${{ vars.IMAGE_NAME }} .
+
+      - name: Salvar imagem Docker em arquivo
+        run: docker save ${{ vars.IMAGE_NAME }} -o ${{ vars.IMAGE_NAME }}.tar
+
+      - name: Configurar SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Enviar imagem Docker para o servidor
+        run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_ADDRESS }}:/tmp/${{ vars.IMAGE_NAME }}.tar
+
+      - name: Carregar a imagem e remover o .tar no servidor
+        run: |
+          ssh ${{ vars.SERVER_ADDRESS }} << 'EOF'
+            docker load -i /tmp/${{ vars.IMAGE_NAME }}.tar
+            rm /tmp/${{ vars.IMAGE_NAME }}.tar
+          EOF
