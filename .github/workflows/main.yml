@@ -10,29 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configurar Docker
-        run: |
-          echo "Construindo a imagem Docker..."
-          docker build -t ${{ vars.IMAGE_NAME }} .
+      - name: Build docker image
+        run: docker build -t ${{ vars.IMAGE_NAME }} .
 
-      - name: Salvar imagem Docker em arquivo
+      - name: Save docker image in a file
         run: docker save ${{ vars.IMAGE_NAME }} -o ${{ vars.IMAGE_NAME }}.tar
 
-      - name: Configurar SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Add server to known_hosts
-        run: ssh-keyscan -H ${{ vars.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
+      - name: Set up SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ vars.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
 
       - name: Transfer image file
         run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_ADDRESS }}:/tmp/${{ vars.IMAGE_NAME }}.tar
 
-      - name: Carregar a imagem e remover o .tar no servidor
+      - name: Load image and remove file from server
         run: |
           ssh ${{ vars.SERVER_ADDRESS }} << 'EOF'
             docker load -i /tmp/${{ vars.IMAGE_NAME }}.tar
