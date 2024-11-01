@@ -26,14 +26,14 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ vars.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ vars.SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: Transfer image file
-        run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_ADDRESS }}:/tmp/${{ vars.IMAGE_NAME }}.tar
+        run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }}:/tmp/${{ vars.IMAGE_NAME }}.tar
 
       - name: Load image and remove file from server
         run: |
-          ssh ${{ vars.SERVER_ADDRESS }} << 'EOF'
+          ssh ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }} << 'EOF'
             docker load -i /tmp/${{ vars.IMAGE_NAME }}.tar
             rm /tmp/${{ vars.IMAGE_NAME }}.tar
           EOF
