@@ -68,13 +68,20 @@ namespace main_menu.Services
 			return userFinded;
 		}
 
-		internal async Task RemoveAccount()
+		internal async Task RemoveAccount(string password)
 		{
 			var user = await _userRepository.GetById(_httpContextService.UserId);
+
 			if (user == null)
 			{
 				throw new BadHttpRequestException("Não foi possível encontrar o usuário.");
 			}
+
+			if (!PasswordHasher.VerifyPassword(password, user.Password))
+			{
+				throw new BadHttpRequestException("Não foi possível prosseguir, credenciais incorretas.");
+			}
+
 			_userRepository.RemoveUser(user);
 			await _userRepository.SaveChanges();
 		}

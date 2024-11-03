@@ -44,9 +44,9 @@ namespace main_menu.Controllers
 		}
 
 		[HttpDelete("remove-account")]
-		public async Task RemoveAccount()
+		public async Task RemoveAccount(string password)
 		{
-			await _userService.RemoveAccount();
+			await _userService.RemoveAccount(password);
 		}
 	}
 }
