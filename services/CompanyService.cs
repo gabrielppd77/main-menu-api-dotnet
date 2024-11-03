@@ -29,6 +29,7 @@ namespace main_menu.Services
 			{
 				Id = company.Id,
 				Name = company.Name,
+				Path = company.Path,
 				Description = company.Description,
 				UrlImage = company.UrlImage
 			};
@@ -44,6 +45,7 @@ namespace main_menu.Services
 			}
 
 			company.Name = request.Name;
+			company.Path = request.Path;
 			company.Description = request.Description;
 			company.UrlImage = request.UrlImage;
 
