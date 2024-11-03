@@ -8,10 +8,12 @@ namespace main_menu.Services
 	public class UserService
 	{
 		private readonly UserRepository _userRepository;
+		private readonly HttpContextService _httpContextService;
 
-		public UserService(UserRepository userRepository)
+		public UserService(UserRepository userRepository, HttpContextService httpContextService)
 		{
 			_userRepository = userRepository;
+			_httpContextService = httpContextService;
 		}
 
 		public async Task<User> CreateUser(RegistrationRequestDTO request)
@@ -64,6 +66,17 @@ namespace main_menu.Services
 			}
 
 			return userFinded;
+		}
+
+		internal async Task RemoveAccount()
+		{
+			var user = await _userRepository.GetById(_httpContextService.UserId);
+			if (user == null)
+			{
+				throw new BadHttpRequestException("Não foi possível encontrar o usuário.");
+			}
+			_userRepository.RemoveUser(user);
+			await _userRepository.SaveChanges();
 		}
 	}
 }

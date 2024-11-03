@@ -31,5 +31,15 @@ namespace main_menu.Database.Repositories
 		{
 			await _context.SaveChangesAsync();
 		}
+
+		internal async Task<User?> GetById(Guid userId)
+		{
+			return await _context.User.FirstOrDefaultAsync(x => x.Id == userId);
+		}
+
+		internal void RemoveUser(User user)
+		{
+			_context.User.Remove(user);
+		}
 	}
 }

@@ -42,5 +42,11 @@ namespace main_menu.Controllers
 				Token = token
 			};
 		}
+
+		[HttpDelete("remove-account")]
+		public async Task RemoveAccount()
+		{
+			await _userService.RemoveAccount();
+		}
 	}
 }
