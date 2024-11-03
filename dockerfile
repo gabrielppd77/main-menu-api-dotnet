@@ -13,4 +13,4 @@ COPY --from=build /app/out .
 
 EXPOSE 80
 
-ENTRYPOINT ["dotnet", "main-menu.dll"]
+ENTRYPOINT ["dotnet", "project.dll"]
