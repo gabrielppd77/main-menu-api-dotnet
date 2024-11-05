@@ -17,6 +17,12 @@ namespace main_menu.Controllers
 			_service = service;
 		}
 
+		[HttpGet("get-all-companies")]
+		public async Task<List<ClientResponseDTO>> GetAllCompanies()
+		{
+			return await _service.GetAllCompanies();
+		}
+
 		[HttpGet("get-company-data")]
 		public async Task<ClientResponseDTO> GetCompanyData(string companyPath)
 		{

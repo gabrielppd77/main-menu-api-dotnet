@@ -12,6 +12,11 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
+		internal async Task<List<Company>> GetAllCompanies()
+		{
+			return await _context.Company.ToListAsync();
+		}
+
 		internal async Task<Company?> GetCompanyData(string companyPath)
 		{
 			return await _context.Company

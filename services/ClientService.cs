@@ -12,6 +12,22 @@ namespace main_menu.Services
 			_repository = repository;
 		}
 
+		internal async Task<List<ClientResponseDTO>> GetAllCompanies()
+		{
+			var companies = await _repository.GetAllCompanies();
+			return companies
+				.Select(x => new ClientResponseDTO()
+				{
+					CompanyId = x.Id,
+					CompanyName = x.Name,
+					CompanyPath = x.Path,
+					CompanyDescription = x.Description,
+					CompanyUrlImage = x.UrlImage,
+					Categories = new List<ClientCategoryResponseDTO>()
+				})
+				.ToList();
+		}
+
 		internal async Task<ClientResponseDTO> GetCompanyData(string companyPath)
 		{
 			var company = await _repository.GetCompanyData(companyPath);
@@ -25,6 +41,7 @@ namespace main_menu.Services
 			{
 				CompanyId = company.Id,
 				CompanyName = company.Name,
+				CompanyPath = company.Path,
 				CompanyDescription = company.Description,
 				CompanyUrlImage = company.UrlImage,
 				Categories = company.Categories!.Select(cat => new ClientCategoryResponseDTO()
