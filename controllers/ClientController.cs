@@ -24,9 +24,9 @@ namespace main_menu.Controllers
 		}
 
 		[HttpGet("get-company-data")]
-		public async Task<ClientResponseDTO> GetCompanyData(string companyPath)
+		public async Task<ClientResponseDTO> GetCompanyData(string companyPath, string? query)
 		{
-			return await _service.GetCompanyData(companyPath);
+			return await _service.GetCompanyData(companyPath, query);
 		}
 	}
 }

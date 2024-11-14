@@ -28,9 +28,9 @@ namespace main_menu.Services
 				.ToList();
 		}
 
-		internal async Task<ClientResponseDTO> GetCompanyData(string companyPath)
+		internal async Task<ClientResponseDTO> GetCompanyData(string companyPath, string? query)
 		{
-			var company = await _repository.GetCompanyData(companyPath);
+			var company = await _repository.GetCompanyData(companyPath, query);
 
 			if (company == null)
 			{

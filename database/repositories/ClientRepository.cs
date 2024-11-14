@@ -17,13 +17,33 @@ namespace main_menu.Database.Repositories
 			return await _context.Company.ToListAsync();
 		}
 
-		internal async Task<Company?> GetCompanyData(string companyPath)
+		internal async Task<Company?> GetCompanyData(string companyPath, string? _query)
 		{
-			return await _context.Company
+			var query = _context.Company
 				.AsNoTracking()
-				.Include(x => x.Categories!.OrderBy(d => d.Order)).ThenInclude(x => x.Products!.OrderBy(d => d.Order))
 				.Where(x => x.Path == companyPath)
-				.FirstOrDefaultAsync();
+				.AsQueryable();
+
+			if (_query != null)
+			{
+				query = query
+					.Include(x => x.Categories!
+						.OrderBy(d => d.Order)
+						.Where(d => d.Products!.Where(c => c.Name.ToLower().Contains(_query.ToLower())).Any())
+					)
+					.ThenInclude(x => x.Products!
+						.OrderBy(d => d.Order)
+						.Where(d => d.Name.ToLower().Contains(_query.ToLower()))
+					);
+			}
+			else
+			{
+				query = query
+					.Include(x => x.Categories!.OrderBy(d => d.Order))
+					.ThenInclude(x => x.Products!.OrderBy(d => d.Order));
+			}
+
+			return await query.FirstOrDefaultAsync();
 		}
 	}
 }
