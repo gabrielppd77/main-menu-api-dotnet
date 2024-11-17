@@ -26,5 +26,12 @@ namespace main_menu.Controllers
 		{
 			await _service.Update(id, request);
 		}
+
+		[HttpGet("get-qr-code")]
+		public async Task<IActionResult> GetQRCode()
+		{
+			var qrCode = await _service.GetQRCode();
+			return File(qrCode, "image/jpeg");
+		}
 	}
 }

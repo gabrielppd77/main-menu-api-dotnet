@@ -31,6 +31,7 @@ namespace main_menu.Configurations
 		{
 			builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection(nameof(JwtSetting)));
 			builder.Services.Configure<MigrationsSetting>(builder.Configuration.GetSection(nameof(MigrationsSetting)));
+			builder.Services.Configure<ClientSetting>(builder.Configuration.GetSection(nameof(ClientSetting)));
 		}
 
 		public static void AddJWT(this WebApplicationBuilder builder)
