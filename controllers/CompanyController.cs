@@ -31,7 +31,7 @@ namespace main_menu.Controllers
 		public async Task<IActionResult> GetQRCode()
 		{
 			var qrCode = await _service.GetQRCode();
-			return File(qrCode, "image/jpeg");
+			return File(qrCode, "image/png", "qrcode.png");
 		}
 	}
 }
