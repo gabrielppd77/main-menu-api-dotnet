@@ -1,39 +1,39 @@
-name: Deploy API to Server
+# name: Deploy API to Server
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Build docker image
-        run: docker build -t ${{ vars.IMAGE_NAME }} .
+#       - name: Build docker image
+#         run: docker build -t ${{ vars.IMAGE_NAME }} .
 
-      - name: Save docker image in a file
-        run: docker save ${{ vars.IMAGE_NAME }} -o ${{ vars.IMAGE_NAME }}.tar
+#       - name: Save docker image in a file
+#         run: docker save ${{ vars.IMAGE_NAME }} -o ${{ vars.IMAGE_NAME }}.tar
 
-      - name: Set up SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ vars.SERVER_HOST }} >> ~/.ssh/known_hosts
+#       - name: Set up SSH
+#         env:
+#           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#         run: |
+#           mkdir -p ~/.ssh
+#           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+#           chmod 600 ~/.ssh/id_rsa
+#           ssh-keyscan -H ${{ vars.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Transfer image file
-        run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }}:/tmp/${{ vars.IMAGE_NAME }}.tar
+#       - name: Transfer image file
+#         run: scp ${{ vars.IMAGE_NAME }}.tar ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }}:/tmp/${{ vars.IMAGE_NAME }}.tar
 
-      - name: Load image and remove file from server
-        run: |
-          ssh ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }} << 'EOF'
-            docker load -i /tmp/${{ vars.IMAGE_NAME }}.tar
-            rm /tmp/${{ vars.IMAGE_NAME }}.tar
-          EOF
+#       - name: Load image and remove file from server
+#         run: |
+#           ssh ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }} << 'EOF'
+#             docker load -i /tmp/${{ vars.IMAGE_NAME }}.tar
+#             rm /tmp/${{ vars.IMAGE_NAME }}.tar
+#           EOF
