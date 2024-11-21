@@ -9,10 +9,12 @@ namespace main_menu.Controllers
 	public class CompanyController : ControllerBase
 	{
 		private readonly CompanyService _service;
+		private readonly ImageManagerService _imageManagerService;
 
-		public CompanyController(CompanyService service)
+		public CompanyController(CompanyService service, ImageManagerService imageManagerService)
 		{
 			_service = service;
+			_imageManagerService = imageManagerService;
 		}
 
 		[HttpGet]
@@ -25,6 +27,12 @@ namespace main_menu.Controllers
 		public async Task Update(Guid id, CompanyUpdateDTO request)
 		{
 			await _service.Update(id, request);
+		}
+
+		[HttpPut("upload-image")]
+		public async Task UpdateImage(IFormFile file)
+		{
+			var imageUrl = await _imageManagerService.UploadImage(file);
 		}
 
 		[HttpGet("get-qr-code")]

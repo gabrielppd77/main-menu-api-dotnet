@@ -10,14 +10,14 @@ namespace main_menu.Services
 		private readonly CompanyRepository _repository;
 		private readonly HttpContextService _httpContextService;
 		private readonly QRCodeGeneratorService _qrCodeGeneratorService;
-		private readonly IOptions<ClientSetting> _clientSetting;
+		private readonly IOptions<DomainSetting> _domainSetting;
 
-		public CompanyService(CompanyRepository repository, HttpContextService httpContextService, QRCodeGeneratorService qrCodeGeneratorService, IOptions<ClientSetting> clientSetting)
+		public CompanyService(CompanyRepository repository, HttpContextService httpContextService, QRCodeGeneratorService qrCodeGeneratorService, IOptions<DomainSetting> domainSetting)
 		{
 			_repository = repository;
 			_httpContextService = httpContextService;
 			_qrCodeGeneratorService = qrCodeGeneratorService;
-			_clientSetting = clientSetting;
+			_domainSetting = domainSetting;
 		}
 
 		internal async Task<CompanyResponseDTO> GetCompany()
@@ -69,7 +69,7 @@ namespace main_menu.Services
 				throw new BadHttpRequestException("Não foi possível encontrar a Empresa.");
 			}
 
-			var urlQrCode = _clientSetting.Value.MainUrl + "/" + company.Path;
+			var urlQrCode = _domainSetting.Value.ClientDomain + "/" + company.Path;
 			var qrCode = _qrCodeGeneratorService.GenerateQRCode(urlQrCode);
 
 			return qrCode;

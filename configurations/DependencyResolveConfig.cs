@@ -22,6 +22,7 @@ namespace main_menu.Configurations
 			services.AddScoped<ClientService>();
 			services.AddScoped<ProjectService>();
 			services.AddScoped<QRCodeGeneratorService>();
+			services.AddScoped<ImageManagerService>();
 		}
 
 		public static void AddRepositories(this IServiceCollection services)

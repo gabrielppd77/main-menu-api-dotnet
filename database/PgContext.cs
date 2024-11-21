@@ -13,10 +13,10 @@ namespace main_menu.Database
 			_configuration = configuration;
 		}
 
-		public DbSet<User> User { get; set; }
-		public DbSet<Company> Company { get; set; }
-		public DbSet<Category> Category { get; set; }
-		public DbSet<Product> Product { get; set; }
+		public required DbSet<User> User { get; set; }
+		public required DbSet<Company> Company { get; set; }
+		public required DbSet<Category> Category { get; set; }
+		public required DbSet<Product> Product { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
