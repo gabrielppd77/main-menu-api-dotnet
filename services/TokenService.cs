@@ -10,6 +10,7 @@ namespace main_menu.Services
 	public class TokenService
 	{
 		private readonly IOptions<JwtSetting> _jwtSetting;
+
 		public TokenService(IOptions<JwtSetting> jwtSetting)
 		{
 			_jwtSetting = jwtSetting;

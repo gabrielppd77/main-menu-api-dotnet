@@ -1,5 +1,6 @@
 using main_menu.DTOS.CompanyDTOS;
 using main_menu.Services;
+using main_menu.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace main_menu.Controllers
@@ -30,9 +31,9 @@ namespace main_menu.Controllers
 		}
 
 		[HttpPut("upload-image")]
-		public async Task UpdateImage(IFormFile file)
+		public async Task<string> UpdateImage(IFormFile file)
 		{
-			var imageUrl = await _imageManagerService.UploadImage(file);
+			return await _imageManagerService.UploadImage(file, Constants.CompanyBucket);
 		}
 
 		[HttpGet("get-qr-code")]

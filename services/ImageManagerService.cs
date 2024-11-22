@@ -1,11 +1,20 @@
+using main_menu.Settings;
+using Microsoft.Extensions.Options;
+
 namespace main_menu.Services
 {
 	public class ImageManagerService
 	{
-		private readonly string _uploadPath = "/var/www/images";
-		private readonly string[] allowedExtensions = { ".jpg", ".png" };
+		private readonly IOptions<DomainSetting> _domainSetting;
 
-		public async Task<string> UploadImage(IFormFile file)
+		private readonly string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+
+		public ImageManagerService(IOptions<DomainSetting> domainSetting)
+		{
+			_domainSetting = domainSetting;
+		}
+
+		public async Task<string> UploadImage(IFormFile file, string bucket)
 		{
 			if (file == null || file.Length == 0)
 			{
@@ -17,9 +26,21 @@ namespace main_menu.Services
 				throw new BadHttpRequestException("A extensão do arquivo não é suportada.");
 			}
 
+			if (file.Length > 5 * 1024 * 1024)
+			{
+				throw new BadHttpRequestException("O arquivo informado é muito grande (Limite 5 MB).");
+			}
+
+			var uploadDirectory = Path.Combine("/app/images", bucket);
+
+			if (!Directory.Exists(uploadDirectory))
+			{
+				Directory.CreateDirectory(uploadDirectory);
+			}
+
 			var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
 
-			var filePath = Path.Combine(_uploadPath, fileName);
+			var filePath = Path.Combine(uploadDirectory, fileName);
 
 			try
 			{
@@ -28,7 +49,7 @@ namespace main_menu.Services
 					await file.CopyToAsync(stream);
 				}
 
-				return fileName;
+				return $"{_domainSetting.Value.ImageDomain}/{bucket}/{fileName}";
 			}
 			catch (Exception ex)
 			{

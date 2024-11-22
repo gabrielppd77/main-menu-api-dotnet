@@ -4,5 +4,6 @@ namespace main_menu.Settings
 	{
 		public required string ClientDomain { get; set; }
 		public required string ApiDomain { get; set; }
+		public required string ImageDomain { get; set; }
 	}
 }
