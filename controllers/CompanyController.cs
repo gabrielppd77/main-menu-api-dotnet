@@ -30,10 +30,11 @@ namespace main_menu.Controllers
 			await _service.Update(id, request);
 		}
 
-		[HttpPut("upload-image")]
-		public async Task<string> UpdateImage(IFormFile file)
+		[HttpPut("update-image/{id}")]
+		public async Task UpdateImage(Guid id, IFormFile file)
 		{
-			return await _imageManagerService.UploadImage(file, Constants.CompanyBucket);
+			var urlImage = await _imageManagerService.UploadImage(file, Constants.CompanyBucket);
+			await _service.UpdateImage(id, urlImage);
 		}
 
 		[HttpGet("get-qr-code")]

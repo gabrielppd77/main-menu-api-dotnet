@@ -28,7 +28,7 @@ namespace main_menu.Services
 
 			if (company == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a Empresa.");
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
 			}
 
 			return new CompanyResponseDTO()
@@ -47,13 +47,12 @@ namespace main_menu.Services
 
 			if (company == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a Empresa.");
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
 			}
 
 			company.Name = request.Name;
 			company.Path = request.Path;
 			company.Description = request.Description;
-			company.UrlImage = request.UrlImage;
 
 			await _repository.SaveChanges();
 		}
@@ -66,13 +65,27 @@ namespace main_menu.Services
 
 			if (company == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a Empresa.");
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
 			}
 
 			var urlQrCode = _domainSetting.Value.ClientDomain + "/" + company.Path;
 			var qrCode = _qrCodeGeneratorService.GenerateQRCode(urlQrCode);
 
 			return qrCode;
+		}
+
+		internal async Task UpdateImage(Guid id, string urlImage)
+		{
+			var company = await _repository.GetById(id);
+
+			if (company == null)
+			{
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
+			}
+
+			company.UrlImage = urlImage;
+
+			await _repository.SaveChanges();
 		}
 	}
 }
