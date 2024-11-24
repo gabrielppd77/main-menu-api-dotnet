@@ -34,7 +34,7 @@ namespace main_menu.Services
 
 			if (company == null)
 			{
-				throw new BadHttpRequestException("Não foi possível encontrar a empresa.");
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
 			}
 
 			return new ClientResponseDTO()
