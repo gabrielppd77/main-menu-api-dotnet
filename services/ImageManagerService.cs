@@ -7,6 +7,7 @@ namespace main_menu.Services
 	{
 		private readonly IOptions<DomainSetting> _domainSetting;
 
+		private readonly string _baseDirectory = "/app/images";
 		private readonly string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
 		public ImageManagerService(IOptions<DomainSetting> domainSetting)
@@ -31,7 +32,7 @@ namespace main_menu.Services
 				throw new BadHttpRequestException("O arquivo informado é muito grande (Limite 5 MB).");
 			}
 
-			var uploadDirectory = Path.Combine("/app/images", bucket);
+			var uploadDirectory = Path.Combine(_baseDirectory, bucket);
 
 			if (!Directory.Exists(uploadDirectory))
 			{
@@ -54,6 +55,32 @@ namespace main_menu.Services
 			catch (Exception ex)
 			{
 				throw new Exception("Tentar salvar o arquivo.", ex);
+			}
+		}
+
+		public void RemoveImage(string fileName, string bucket)
+		{
+			if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(bucket))
+			{
+				throw new ArgumentException("Nome do arquivo ou bucket inválido.");
+			}
+
+			var filePath = Path.Combine(_baseDirectory, bucket, fileName);
+
+			try
+			{
+				if (File.Exists(filePath))
+				{
+					File.Delete(filePath);
+				}
+				else
+				{
+					throw new FileNotFoundException("Arquivo não encontrado.");
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Erro ao tentar remover o arquivo.", ex);
 			}
 		}
 	}
