@@ -1,6 +1,5 @@
 using main_menu.DTOS.CompanyDTOS;
 using main_menu.Services;
-using main_menu.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace main_menu.Controllers
@@ -10,12 +9,10 @@ namespace main_menu.Controllers
 	public class CompanyController : ControllerBase
 	{
 		private readonly CompanyService _service;
-		private readonly ImageManagerService _imageManagerService;
 
-		public CompanyController(CompanyService service, ImageManagerService imageManagerService)
+		public CompanyController(CompanyService service)
 		{
 			_service = service;
-			_imageManagerService = imageManagerService;
 		}
 
 		[HttpGet]
@@ -33,8 +30,7 @@ namespace main_menu.Controllers
 		[HttpPut("update-image/{id}")]
 		public async Task UpdateImage(Guid id, IFormFile file)
 		{
-			var urlImage = await _imageManagerService.UploadImage(file, Constants.CompanyBucket);
-			await _service.UpdateImage(id, urlImage);
+			await _service.UpdateImage(id, file);
 		}
 
 		[HttpGet("get-qr-code")]
