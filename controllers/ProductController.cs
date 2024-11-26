@@ -15,28 +15,40 @@ namespace main_menu.Controllers
 			_service = service;
 		}
 
-		[HttpGet]
-		public async Task<List<ProductResponseDTO>> GetAll()
+		[HttpGet()]
+		public async Task<List<ProductResponseTableDTO>> GetAll()
 		{
 			return await _service.GetAll();
 		}
 
-		[HttpPost]
+		[HttpPost()]
 		public async Task Create(ProductRequestDTO request)
 		{
 			await _service.Create(request);
 		}
 
-		[HttpPut("{id}")]
+		[HttpPut()]
 		public async Task Update(Guid id, ProductRequestDTO request)
 		{
 			await _service.Update(id, request);
 		}
 
-		[HttpDelete("{id}")]
+		[HttpDelete()]
 		public async Task Remove(Guid id)
 		{
 			await _service.Remove(id);
+		}
+
+		[HttpGet("{id}")]
+		public async Task<ProductResponseFormDTO> GetById(Guid id)
+		{
+			return await _service.GetById(id);
+		}
+
+		[HttpPut("update-image")]
+		public async Task UpdateImage(Guid id, IFormFile file)
+		{
+			await _service.UpdateImage(id, file);
 		}
 	}
 }
