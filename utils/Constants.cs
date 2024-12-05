@@ -4,5 +4,6 @@ namespace main_menu.Utils
 	{
 		public static string CorsPolicy = "CorsPolicy";
 		public static string CompanyBucket = "company";
+		public static string ProductBucket = "product";
 	}
 }
