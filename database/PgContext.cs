@@ -17,6 +17,8 @@ namespace main_menu.Database
 		public required DbSet<Company> Company { get; set; }
 		public required DbSet<Category> Category { get; set; }
 		public required DbSet<Product> Product { get; set; }
+		public required DbSet<OptionDivider> OptionDivider { get; set; }
+		public required DbSet<Option> Option { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -35,6 +37,8 @@ namespace main_menu.Database
 			modelBuilder.ApplyConfiguration(new Company_Map());
 			modelBuilder.ApplyConfiguration(new Category_Map());
 			modelBuilder.ApplyConfiguration(new Product_Map());
+			modelBuilder.ApplyConfiguration(new OptionDivider_Map());
+			modelBuilder.ApplyConfiguration(new Option_Map());
 
 			base.OnModelCreating(modelBuilder);
 		}
