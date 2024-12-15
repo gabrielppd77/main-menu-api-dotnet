@@ -21,7 +21,7 @@ namespace main_menu.Database.Repositories
 		{
 			return await _context.Product
 				.Include(x => x.Category)
-				.Where(x => x.CompanyId == companyId)
+				.Where(x => x.Category!.CompanyId == companyId)
 				.OrderBy(x => x.Order)
 				.ToListAsync();
 		}

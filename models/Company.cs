@@ -11,6 +11,5 @@ namespace main_menu.Models
 
 		public virtual User? User { get; set; }
 		public virtual List<Category>? Categories { get; set; }
-		public virtual List<Product>? Products { get; set; }
 	}
 }

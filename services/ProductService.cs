@@ -39,7 +39,7 @@ namespace main_menu.Services
 			var product = new Product()
 			{
 				Id = Guid.NewGuid(),
-				CompanyId = companyId,
+				// CompanyId = companyId,
 				CategoryId = request.CategoryId,
 				Name = request.Name,
 				Description = request.Description,
