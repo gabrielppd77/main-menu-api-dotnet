@@ -28,7 +28,6 @@ namespace main_menu.Configurations
 		public static void AddRepositories(this IServiceCollection services)
 		{
 			services.AddScoped<UserRepository>();
-			services.AddScoped<HttpContextRepository>();
 			services.AddScoped<CompanyRepository>();
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();

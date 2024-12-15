@@ -21,16 +21,16 @@ namespace main_menu.Controllers
 			return await _service.GetCompany();
 		}
 
-		[HttpPut("{id}")]
-		public async Task Update(Guid id, CompanyUpdateDTO request)
+		[HttpPut()]
+		public async Task Update(CompanyUpdateDTO request)
 		{
-			await _service.Update(id, request);
+			await _service.Update(request);
 		}
 
-		[HttpPut("update-image/{id}")]
-		public async Task UpdateImage(Guid id, IFormFile file)
+		[HttpPut("update-image")]
+		public async Task UpdateImage(IFormFile file)
 		{
-			await _service.UpdateImage(id, file);
+			await _service.UpdateImage(file);
 		}
 
 		[HttpGet("get-qr-code")]

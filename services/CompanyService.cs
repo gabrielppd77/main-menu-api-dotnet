@@ -25,9 +25,7 @@ namespace main_menu.Services
 
 		internal async Task<CompanyResponseDTO> GetCompany()
 		{
-			var companyId = await _httpContextService.GetCompanyId();
-
-			var company = await _repository.GetById(companyId);
+			var company = await _repository.GetByUser(_httpContextService.UserId);
 
 			if (company == null)
 			{
@@ -44,9 +42,9 @@ namespace main_menu.Services
 			};
 		}
 
-		internal async Task Update(Guid id, CompanyUpdateDTO request)
+		internal async Task Update(CompanyUpdateDTO request)
 		{
-			var company = await _repository.GetById(id);
+			var company = await _repository.GetByUser(_httpContextService.UserId);
 
 			if (company == null)
 			{
@@ -62,9 +60,7 @@ namespace main_menu.Services
 
 		internal async Task<byte[]> GetQRCode()
 		{
-			var companyId = await _httpContextService.GetCompanyId();
-
-			var company = await _repository.GetById(companyId);
+			var company = await _repository.GetByUser(_httpContextService.UserId);
 
 			if (company == null)
 			{
@@ -77,9 +73,9 @@ namespace main_menu.Services
 			return qrCode;
 		}
 
-		internal async Task UpdateImage(Guid id, IFormFile file)
+		internal async Task UpdateImage(IFormFile file)
 		{
-			var company = await _repository.GetById(id);
+			var company = await _repository.GetByUser(_httpContextService.UserId);
 
 			if (company == null)
 			{

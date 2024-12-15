@@ -20,8 +20,7 @@ namespace main_menu.Services
 
 		internal async Task<List<ProductResponseTableDTO>> GetAll()
 		{
-			var companyId = await _httpContextService.GetCompanyId();
-			var products = await _repository.GetAllByCompany(companyId);
+			var products = await _repository.GetAllByUser(_httpContextService.UserId);
 			return products.Select(x => new ProductResponseTableDTO()
 			{
 				Id = x.Id,
@@ -35,11 +34,9 @@ namespace main_menu.Services
 
 		internal async Task Create(ProductRequestDTO request)
 		{
-			var companyId = await _httpContextService.GetCompanyId();
 			var product = new Product()
 			{
 				Id = Guid.NewGuid(),
-				// CompanyId = companyId,
 				CategoryId = request.CategoryId,
 				Name = request.Name,
 				Description = request.Description,

@@ -17,8 +17,7 @@ namespace main_menu.Services
 
 		internal async Task<List<CategoryResponseDTO>> GetAll()
 		{
-			var companyId = await _httpContextService.GetCompanyId();
-			var categories = await _repository.GetAllByCompany(companyId);
+			var categories = await _repository.GetAllByUser(_httpContextService.UserId);
 			return categories.Select(x => new CategoryResponseDTO()
 			{
 				Id = x.Id,
@@ -29,7 +28,13 @@ namespace main_menu.Services
 
 		internal async Task Create(CategoryRequestDTO request)
 		{
-			var companyId = await _httpContextService.GetCompanyId();
+			var companyId = await _repository.GetCompanyIdByUser(_httpContextService.UserId);
+
+			if (companyId == default)
+			{
+				throw new BadHttpRequestException("Não foi possível encontrar a loja.");
+			}
+
 			var category = new Category()
 			{
 				Id = Guid.NewGuid(),

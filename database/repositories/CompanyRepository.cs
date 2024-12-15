@@ -12,9 +12,9 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
-		internal async Task<Company?> GetById(Guid id)
+		internal async Task<Company?> GetByUser(Guid userId)
 		{
-			return await _context.Company.Where(x => x.Id == id).FirstOrDefaultAsync();
+			return await _context.Company.Where(x => x.UserId == userId).FirstOrDefaultAsync();
 		}
 
 		internal async Task SaveChanges()

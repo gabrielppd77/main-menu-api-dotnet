@@ -17,11 +17,11 @@ namespace main_menu.Database.Repositories
 			await _context.Product.AddAsync(product);
 		}
 
-		internal async Task<List<Product>> GetAllByCompany(Guid companyId)
+		internal async Task<List<Product>> GetAllByUser(Guid userId)
 		{
 			return await _context.Product
 				.Include(x => x.Category)
-				.Where(x => x.Category!.CompanyId == companyId)
+				.Where(x => x.Category!.Company!.UserId == userId)
 				.OrderBy(x => x.Order)
 				.ToListAsync();
 		}

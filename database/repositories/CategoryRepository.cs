@@ -17,10 +17,10 @@ namespace main_menu.Database.Repositories
 			await _context.Category.AddAsync(category);
 		}
 
-		internal async Task<List<Category>> GetAllByCompany(Guid companyId)
+		internal async Task<List<Category>> GetAllByUser(Guid userId)
 		{
 			return await _context.Category
-				.Where(x => x.CompanyId == companyId)
+				.Where(x => x.Company!.UserId == userId)
 				.OrderBy(x => x.Order)
 				.ToListAsync();
 		}
@@ -28,6 +28,14 @@ namespace main_menu.Database.Repositories
 		internal async Task<Category?> GetById(Guid id)
 		{
 			return await _context.Category.Where(x => x.Id == id).FirstOrDefaultAsync();
+		}
+
+		internal async Task<Guid> GetCompanyIdByUser(Guid userId)
+		{
+			return await _context.Company
+				.Where(x => x.UserId == userId)
+				.Select(x => x.Id)
+				.FirstOrDefaultAsync();
 		}
 
 		internal void RemoveCategory(Category category)
