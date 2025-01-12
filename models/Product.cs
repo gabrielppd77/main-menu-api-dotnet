@@ -11,6 +11,6 @@ namespace main_menu.Models
 		public required decimal Price { get; set; }
 
 		public virtual Category? Category { get; set; }
-		public virtual List<OptionDivider>? OptionsDivider { get; set; }
+		public virtual List<ProductOption>? Options { get; set; }
 	}
 }
