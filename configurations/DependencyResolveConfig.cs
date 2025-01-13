@@ -1,5 +1,7 @@
 using main_menu.Database;
 using main_menu.Database.Repositories;
+using main_menu.Interfaces.Repositories;
+using main_menu.Interfaces.Services;
 using main_menu.Services;
 
 namespace main_menu.Configurations
@@ -13,7 +15,7 @@ namespace main_menu.Configurations
 
 		public static void AddServices(this IServiceCollection services)
 		{
-			services.AddScoped<UserService>();
+			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<TokenService>();
 			services.AddScoped<HttpContextService>();
 			services.AddScoped<CompanyService>();
@@ -27,7 +29,7 @@ namespace main_menu.Configurations
 
 		public static void AddRepositories(this IServiceCollection services)
 		{
-			services.AddScoped<UserRepository>();
+			services.AddScoped<IUserRepository, UserRepository>();
 			services.AddScoped<CompanyRepository>();
 			services.AddScoped<CategoryRepository>();
 			services.AddScoped<ProductRepository>();

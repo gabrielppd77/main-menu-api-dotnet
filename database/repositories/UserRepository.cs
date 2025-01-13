@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using main_menu.Models;
+using main_menu.Interfaces.Repositories;
 
 namespace main_menu.Database.Repositories
 {
-	public class UserRepository
+	public class UserRepository : IUserRepository
 	{
 		private readonly PgContext _context;
 
@@ -12,32 +13,32 @@ namespace main_menu.Database.Repositories
 			_context = context;
 		}
 
-		internal async Task AddUser(User user)
+		public async Task AddUser(User user)
 		{
 			await _context.User.AddAsync(user);
 		}
 
-		internal async Task AddCompany(Company company)
+		public async Task AddCompany(Company company)
 		{
 			await _context.Company.AddAsync(company);
 		}
 
-		internal async Task<User?> FindByEmail(string email)
+		public async Task<User?> FindByEmail(string email)
 		{
 			return await _context.User.Where(x => x.Email == email).FirstOrDefaultAsync();
 		}
 
-		internal async Task SaveChanges()
+		public async Task SaveChanges()
 		{
 			await _context.SaveChangesAsync();
 		}
 
-		internal async Task<User?> GetById(Guid userId)
+		public async Task<User?> GetById(Guid userId)
 		{
 			return await _context.User.FirstOrDefaultAsync(x => x.Id == userId);
 		}
 
-		internal void RemoveUser(User user)
+		public void RemoveUser(User user)
 		{
 			_context.User.Remove(user);
 		}

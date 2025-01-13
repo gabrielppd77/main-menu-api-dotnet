@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using main_menu.DTOS.UserDTOS;
 using main_menu.Services;
 using Microsoft.AspNetCore.Authorization;
+using main_menu.Interfaces.Services;
 
 namespace main_menu.Controllers
 {
@@ -10,10 +11,10 @@ namespace main_menu.Controllers
 	[Route("api/[controller]")]
 	public class UserController : ControllerBase
 	{
-		private readonly UserService _userService;
+		private readonly IUserService _userService;
 		private readonly TokenService _tokenService;
 
-		public UserController(UserService userService, TokenService tokenService)
+		public UserController(IUserService userService, TokenService tokenService)
 		{
 			_userService = userService;
 			_tokenService = tokenService;

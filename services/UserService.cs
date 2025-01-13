@@ -1,16 +1,17 @@
 using main_menu.DTOS.UserDTOS;
 using main_menu.Models;
 using main_menu.Utils;
-using main_menu.Database.Repositories;
+using main_menu.Interfaces.Repositories;
+using main_menu.Interfaces.Services;
 
 namespace main_menu.Services
 {
-	public class UserService
+	public class UserService : IUserService
 	{
-		private readonly UserRepository _userRepository;
+		private readonly IUserRepository _userRepository;
 		private readonly HttpContextService _httpContextService;
 
-		public UserService(UserRepository userRepository, HttpContextService httpContextService)
+		public UserService(IUserRepository userRepository, HttpContextService httpContextService)
 		{
 			_userRepository = userRepository;
 			_httpContextService = httpContextService;
@@ -68,7 +69,7 @@ namespace main_menu.Services
 			return userFinded;
 		}
 
-		internal async Task RemoveAccount(string password)
+		public async Task RemoveAccount(string password)
 		{
 			var user = await _userRepository.GetById(_httpContextService.UserId);
 
