@@ -17,7 +17,7 @@ namespace main_menu.Configurations
 		{
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<TokenService>();
-			services.AddScoped<HttpContextService>();
+			services.AddScoped<IHttpContextService, HttpContextService>();
 			services.AddScoped<CompanyService>();
 			services.AddScoped<CategoryService>();
 			services.AddScoped<ProductService>();

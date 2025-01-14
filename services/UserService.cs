@@ -9,9 +9,9 @@ namespace main_menu.Services
 	public class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
-		private readonly HttpContextService _httpContextService;
+		private readonly IHttpContextService _httpContextService;
 
-		public UserService(IUserRepository userRepository, HttpContextService httpContextService)
+		public UserService(IUserRepository userRepository, IHttpContextService httpContextService)
 		{
 			_userRepository = userRepository;
 			_httpContextService = httpContextService;

@@ -1,8 +1,9 @@
 using System.Security.Claims;
+using main_menu.Interfaces.Services;
 
 namespace main_menu.Services
 {
-	public class HttpContextService
+	public class HttpContextService : IHttpContextService
 	{
 		private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -11,7 +12,7 @@ namespace main_menu.Services
 			_httpContextAccessor = httpContextAccessor;
 		}
 
-		internal Guid UserId
+		public new Guid UserId
 		{
 			get
 			{
