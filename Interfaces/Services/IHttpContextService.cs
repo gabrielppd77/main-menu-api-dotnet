@@ -1,7 +1,7 @@
 namespace main_menu.Interfaces.Services
 {
-	public class IHttpContextService
+	public interface IHttpContextService
 	{
-		public Guid UserId { get; }
+		Guid UserId { get; }
 	}
 }

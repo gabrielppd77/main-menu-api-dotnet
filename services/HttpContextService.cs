@@ -12,7 +12,7 @@ namespace main_menu.Services
 			_httpContextAccessor = httpContextAccessor;
 		}
 
-		public new Guid UserId
+		public Guid UserId
 		{
 			get
 			{
